@@ -11,5 +11,11 @@ import 'package:adjust_sdk/adjust.dart';
 Future<String> getDeeplink() async {
   // Add your function code here!
   String deeplink = await Adjust.getLastDeeplink() ?? "";
+  final uri = Uri.parse(deeplink);
+  try {
+    deeplink = uri.path.replaceFirst("/", "");
+  } catch (e) {
+    deeplink = "";
+  }
   return deeplink;
 }

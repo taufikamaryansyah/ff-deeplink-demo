@@ -34,6 +34,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       _model.deeplinkGet = await actions.getDeeplink();
       _model.deeplinkName = _model.deeplinkGet;
       safeSetState(() {});
+      if ((_model.deeplinkName != null && _model.deeplinkName != '') &&
+          (_model.deeplinkName == 'verification')) {
+        context.pushNamed(VerificationWidget.routeName);
+      } else if ((_model.deeplinkName != null && _model.deeplinkName != '') &&
+          (_model.deeplinkName == 'onboard-kreditmu')) {
+        context.pushNamed(KreditmuWidget.routeName);
+      }
     });
   }
 
