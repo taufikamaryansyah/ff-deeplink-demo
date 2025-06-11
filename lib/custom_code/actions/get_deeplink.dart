@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:adjust_sdk/adjust.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<String> getDeeplink() async {
   // Add your function code here!
-  String deeplink = await Adjust.getLastDeeplink() ?? "";
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String deeplink = prefs.getString('deeplink') ?? "";
   print("Raw Deeplink: $deeplink");
 
   try {
