@@ -16,7 +16,8 @@ Future<String> getDeeplink() async {
 
   try {
     final uri = Uri.parse(deeplink);
-    final hostSegment = uri.host;
+    final hostSegment =
+        uri.pathSegments.isNotEmpty ? uri.pathSegments.last : "";
     print("Host Segment: $hostSegment");
     return hostSegment;
   } catch (e) {
