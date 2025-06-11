@@ -34,6 +34,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       _model.deeplinkGet = await actions.getDeeplink();
       _model.deeplinkName = _model.deeplinkGet;
       safeSetState(() {});
+      await actions.removeDeeplink();
       if ((_model.deeplinkName != null && _model.deeplinkName != '') &&
           (_model.deeplinkName == 'verification')) {
         context.pushNamed(VerificationWidget.routeName);
