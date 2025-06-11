@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<String> getDeeplink() async {
@@ -16,10 +17,14 @@ Future<String> getDeeplink() async {
 
   try {
     final uri = Uri.parse(deeplink);
-    final hostSegment =
-        uri.pathSegments.isNotEmpty ? uri.pathSegments.last : "";
-    print("Host Segment: $hostSegment");
-    return hostSegment;
+
+    if (Platform.isAndroid) {
+      return uri.host;
+    } else if (Platform.isIOS) {
+      return uri.pathSegments.isNotEmpty ? uri.pathSegments.last : "";
+    } else {
+      return "";
+    }
   } catch (e) {
     print("Error parsing deeplink: $e");
     return "";
